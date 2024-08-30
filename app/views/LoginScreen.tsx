@@ -8,16 +8,18 @@ import {
   Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
-const LoginScreen = (navigation: any) => {
+const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
   const handleCancel = () => {
     Alert.alert('Login Cancelled');
     navigation.navigate('Home');
   };
   const handleNavigateRegister = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Register');
   };
 
   const handleLogin = () => {
@@ -50,12 +52,66 @@ const LoginScreen = (navigation: any) => {
     }
   };
   const styles = StyleSheet.create({
-    container: {},
+    container: {
+      flex: 1,
+      paddingBottom: '45%',
+      paddingTop: '5%',
+      alignItems: 'center',
+    },
+    heading: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    inputs: {
+      width: '80%',
+      marginTop: 15,
+      borderWidth: 1,
+      height: 45,
+      fontSize: 16,
+    },
+    labels: {
+      paddingBottom: 10,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    buttons: {
+      padding: 15,
+      margin: 5,
+      fontSize: 16,
+      backgroundColor: '#DDDDDD',
+      width: 150,
+      height: 50,
+      textAlign: 'center',
+    },
   });
 
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
+      <Text style={styles.heading}>Login</Text>
+      <TextInput
+        style={styles.inputs}
+        value={username}
+        onChangeText={setUsername}
+      />
+      <Text style={styles.labels}>Enter Username</Text>
+      <TextInput
+        style={styles.inputs}
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={true}
+      />
+      <Text style={styles.labels}>Enter Password</Text>
+      <TouchableHighlight onPress={handleLogin} underlayColor="#000000">
+        <Text style={styles.buttons}>Login</Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={handleCancel} underlayColor="#000000">
+        <Text style={styles.buttons}>Cancel</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        onPress={handleNavigateRegister}
+        underlayColor="#000000">
+        <Text style={styles.buttons}>Create Account</Text>
+      </TouchableHighlight>
     </View>
   );
 };

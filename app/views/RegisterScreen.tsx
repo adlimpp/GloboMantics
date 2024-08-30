@@ -8,12 +8,13 @@ import {
   Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
-const RegisterScreen = (navigation: any) => {
+const RegisterScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-
+  const navigation = useNavigation();
   const handleCancel = () => {
     Alert.alert('Registration Cancelled');
     navigation.navigate('Home');
@@ -57,6 +58,7 @@ const RegisterScreen = (navigation: any) => {
       width: 150,
       height: 50,
       textAlign: 'center',
+      color: '#ffffff',
     },
     labels: {
       paddingBottom: 10,
@@ -96,17 +98,11 @@ const RegisterScreen = (navigation: any) => {
       />
       <Text style={styles.labels}>Input Password Confirmation</Text>
 
-      <TouchableHighlight
-        onPress={registerAccount}
-        underlayColor="#000000"
-        style={styles.buttons}>
-        Register
+      <TouchableHighlight onPress={registerAccount} underlayColor="#000000">
+        <Text style={styles.buttons}>Register</Text>
       </TouchableHighlight>
-      <TouchableHighlight
-        onPress={handleCancel}
-        underlayColor="#000000"
-        style={styles.buttons}>
-        Cancel
+      <TouchableHighlight onPress={handleCancel} underlayColor="#000000">
+        <Text style={styles.buttons}>Cancel</Text>
       </TouchableHighlight>
     </View>
   );
